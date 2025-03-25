@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Prueba api</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+        body {
+            background: #aac;
+            font-family: "Concert One", san-serif;
+        }
+        img {
+            height: auto;
+            max-width: 100%;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .container {
+            max-width: 90rem;
+            margin: 0 auto;
+        }
+        .movies__container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .movies__h1 {
+            font-size: 5rem;
+            font-weight: bold;
+        }
+        .movie {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            border-radius: 1rem;
+        }
+        .movie__h2 {
+            font-size: 2rem;
+        }
+        .movie__img {
+            max-height: 30rem;
+            object-fit: cover;
+        }
+        .movie__year {
+            font-size: 1.5rem;
+            color: blue;
+        }
+        .movie__button-delete {
+            background: blue;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-block: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            color: white;
+            transition: 0.3s;
+        }
+        .movie__button-delete:hover {
+            cursor: pointer;
+            background: darkblue;
+            scale: 1.02;
+        }
+    </style>
+    <script type="module">
+        (async function () {
+            const request = await fetch("http://localhost:3000/movies");
+            const movies = await request.json();
+            const moviesContainer =
+                document.querySelector(".movies__container");
+
+            movies.forEach((movie) => {
+                const article = document.createElement("ARTICLE");
+                article.classList.add("movie");
+                article.dataset.id = movie.id;
+                const h2 = document.createElement("H2");
+                h2.classList.add("movie__h2", "text-center");
+                h2.textContent = movie.title;
+                const img = document.createElement("IMG");
+                img.classList.add("movie__img");
+                img.src = movie.poster;
+                img.alt = movie.title;
+                const p = document.createElement("P");
+                p.classList.add("movie__year");
+                p.textContent = movie.year;
+                const deleteBtn = document.createElement("BUTTON");
+                deleteBtn.textContent = "Eliminar";
+                deleteBtn.classList.add("movie__button-delete");
+                deleteBtn.onclick = function (e) {
+                    // Buscamos el article que esté mas cerca del boton clickeado
+                    const article = e.target.closest("article");
+                    // Recuperamos el id del article para eliminarlo
+                    const id = article.dataset.id;
+                    // Mandamos el id en la url para trabajar el delete en el backend
+                    fetch(`http://localhost:3000/movies/${id}`, {
+                        method: "DELETE",
+                    }).then((res) => {
+                        // Si el fetch es exitosos
+                        if (res.ok) {
+                            // Removemos el articulo del html
+                            article.remove();
+                        }
+                    });
+                };
+                article.appendChild(h2);
+                article.appendChild(img);
+                article.appendChild(p);
+                article.appendChild(deleteBtn);
+
+                const frgm = document.createDocumentFragment();
+                frgm.appendChild(article);
+                moviesContainer.appendChild(frgm);
+            });
+        })();
+    </script>
+    <body>
+        <div class="movies">
+            <h1 class="movies__h1 text-center">Movies</h1>
+            <div class="movies__container container"></div>
+        </div>
+    </body>
+</html>
