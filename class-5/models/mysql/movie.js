@@ -31,7 +31,7 @@ export class MovieModel {
             // querya a movie_genres
             const [moviesByGenre] = await connection.query(
                 `
-                SELECT BIN_TO_UUID(movie.id) as id, title, movie.year, movie.director, movie.duration, movie.poster, genre.name as genre, movie.rate 
+                SELECT BIN_TO_UUID(movie.id) as id, movie.title, movie.year, movie.director, movie.duration, movie.poster, genre.name as genre, movie.rate 
                 FROM movie 
                 INNER JOIN movies_genres on movies_genres.movie_id = movie.id 
                 INNER JOIN genre on genre.id = movies_genres.genre_id 
@@ -52,7 +52,7 @@ export class MovieModel {
     static async getById({ id }) {
         const [movie] = await connection.query(
             `
-            SELECT BIN_TO_UUID(movie.id) as id,movie.title movie.year, movie.director, movie.duration, movie.poster, genre.name as genre, movie.rate FROM movie
+            SELECT BIN_TO_UUID(movie.id) as id,movie.title, movie.year, movie.director, movie.duration, movie.poster, genre.name as genre, movie.rate FROM movie
             INNER JOIN movies_genres on movies_genres.movie_id = movie.id INNER JOIN genre on genre.id = movies_genres.genre_id
             WHERE movie.id = UUID_TO_BIN(?)
             `,

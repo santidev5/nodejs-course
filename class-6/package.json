@@ -1,21 +1,21 @@
 {
-    "name": "class-5",
+    "name": "chat",
     "version": "1.0.0",
     "main": "app.js",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start:mysql": "node --watch server-with-mysql.js",
-        "start:local": "node --watch server-with-local.js"
+        "dev": "node --watch ./server/index.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "description": "",
     "dependencies": {
-        "cors": "2.8.5",
+        "dotenv": "16.4.7",
         "express": "4.21.2",
-        "mysql2": "^3.14.0",
-        "zod": "3.24.2"
+        "morgan": "1.10.0",
+        "mysql2": "3.14.0",
+        "socket.io": "4.8.1"
     }
 }
