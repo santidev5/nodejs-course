@@ -1,0 +1,13 @@
+[
+    {
+        "_id": "be682e20-6b43-4cc6-b8d8-7278b9f570fc",
+        "username": "santinomaturo",
+        "password": "$2b$10$RQLUjMqojpkju9iXeVPNqOKpVLA8KRKy2uZJT9QB7OtUkk2OnKecC",
+        "refreshToken": ""
+    },
+    {
+        "_id": "e43a0662-7113-4841-b6a9-a24a844fe29e",
+        "username": "santi",
+        "password": "$2b$10$ffEbACLlU7c7hbq9pjaA9.xp5IjgZbewSjXhYI.FO/oZ8cRu2EHzS"
+    }
+]

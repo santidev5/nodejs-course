@@ -1,0 +1,38 @@
+### Recuperar todas las peliculas
+GET http://localhost:3000/movies
+
+### Recuperar una pelicula por id
+GET http://localhost:3000/movies/08b8da8c-09a4-11f0-9309-b42e99ee1a78
+
+### Recuperar todas las peliculas por un genero
+GET http://localhost:3000/movies?genre=action
+
+### Crear una pelicula con POST
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "Inception",
+    "year": 1990,
+    "director": "Pepovich",
+    "duration": 145,
+    "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
+    "genre": [
+      "Drama",
+      "Animation"
+    ]
+}
+
+### Borrar una pelicula
+DELETE http://localhost:3000/movies/aed21e6a-097f-11f0-9309-b42e99ee1a78
+
+### Actualizar una pelicula
+PATCH http://localhost:3000/movies/08b8da8c-09a4-11f0-9309-b42e99ee1a78
+Content-Type: application/json
+
+{
+  "title": "El mundito magico de pepe",
+  "year": 1990,
+  "director": "santidev"
+}
+
